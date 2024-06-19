@@ -13,10 +13,9 @@ public class Menu {
 
     public void mostrarMenu() {
         int op;
-        boolean sw1;
+        boolean sw1 = true;
 
         opc = new OperacionesCadena();
-        sw1 = true;
 
         do {
             System.out.println("Menu: ");
@@ -25,7 +24,7 @@ public class Menu {
             System.out.println("3. Concatenar una cadena X con una cadena Y.");
             System.out.println("4. indicar cuantas veces un sub-cadena X se encuentra en una cadena Y.");
             System.out.println("5. Salir.");
-            System.out.println("");
+            System.out.println();
             op = introducirOpcion();
             System.out.println("-----------------------------------------------------------------------");
             switch (op) {
@@ -52,7 +51,7 @@ public class Menu {
                     System.out.println("***Valor invalido***");
                     break;
             }
-        } while (sw1 == true);
+        } while (sw1);
     }
 
     public int introducirOpcion() {
@@ -78,28 +77,20 @@ public class Menu {
     }
 
     public void ingresarCadena() {
-        boolean resultado;
-        Scanner sc;
-        String aux1, aux2;
-
+        Scanner sc = new Scanner(System.in);
         opc = new OperacionesCadena();
-        sc = new Scanner(System.in);
         this.sw = false;
 
         System.out.print("> Ingresa la primera cadena: ");
-        aux1 = sc.nextLine();
+        this.x = opc.validarCadena(sc.nextLine());
         System.out.print("> Ingresa la segunda cadena: ");
-        aux2 = sc.nextLine();
-        System.out.println(this.x + "; " + this.y);
+        this.y = opc.validarCadena(sc.nextLine());
 
-        this.x = opc.validarCadena(aux1);
-        this.y = opc.validarCadena(aux2);
-        resultado = opc.validacionDatos(this.x, this.y);
-
-        if (resultado == false) {
+        if (!opc.validacionDatos(this.x, this.y)) {
             System.out.println("***Los valores introducidos no son validos***");
             this.sw = false;
         } else {
+            System.out.println(this.x + "; " + this.y);
             System.out.println("- Valores captados");
             this.sw = true;
         }
@@ -107,40 +98,34 @@ public class Menu {
 
     public void esSubCadenaX() {
         opc = new OperacionesCadena();
-        boolean resultado;
-        if (this.sw == false) {
+        if (!this.sw) {
             System.out.println("***No ha ingresado valores***");
         } else {
-            resultado = opc.esSubCadenaX(this.x, this.y);
-            if (this.sw == false) {
-                System.out.println("- La sentencia Y no es subcadena de X.");
+            if (!opc.esSubCadenaX(this.x, this.y)) {
+                System.out.println("- La sentencia Y NO es subcadena de X.");
             } else {
-                System.out.println("- La sentencia Y si es subcadena de X.");
+                System.out.println("- La sentencia Y SI es subcadena de X.");
             }
         }
     }
 
     public void concatenarCadena() {
         opc = new OperacionesCadena();
-        String resultado;
 
-        if (this.sw == false) {
+        if (!this.sw) {
             System.out.println("***No ha ingresado valores***");
         } else {
-            resultado = opc.concatenarCadena(this.x, this.y);
-            System.out.println("- Resultado: " + resultado);
+            System.out.println("- Resultado: " + opc.concatenarCadena(this.x, this.y));
         }
     }
 
     public void contarCadena() {
         opc = new OperacionesCadena();
-        int resultado;
 
-        if (this.sw == false) {
+        if (!this.sw) {
             System.out.println("***No ha ingresado valores***");
         } else {
-            resultado =  opc.contarCadena(this.x, this.y);
-            System.out.println("- Las veces que una sub-cadena X se encuentra en una cadena Y es: " + resultado);
+            System.out.println("- Las veces que una sub-cadena X se encuentra en una cadena Y es: " + opc.contarCadena(this.x, this.y));
         }
     }
 }

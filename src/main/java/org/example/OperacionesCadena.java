@@ -6,31 +6,22 @@ public class OperacionesCadena {
     }
 
     public boolean validacionDatos(String x, String y) {
-        boolean sw;
-        sw = true;
-        if (((x.equals("")) || (y.equals("")))) {
-            sw = false;
-        }
-        return sw;
+        return (!x.isEmpty()) && (!y.isEmpty());
     }
 
     public String validarCadena(String cadena) {
-        String resultado;
-        resultado = cadena.replaceAll("[^a-zA-Z0-9 ]", "");
-        return resultado;
+        return cadena.replaceAll("[^a-zA-Z0-9 ]", "");
     }
 
     public boolean esSubCadenaX(String x, String y) {
-        boolean sw;
-        String[] phrase;
-        phrase = y.split("\\s+");
-        sw = true;
+        String[] phrase = y.split("\\s+");
+
         for (String word : phrase) {
             if (!x.contains(word)) {
-                sw = false;
+                return false;
             }
         }
-        return sw;
+        return true;
     }
 
     public String concatenarCadena(String x, String y) {
